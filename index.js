@@ -41,29 +41,23 @@ const transporter = nodemailer.createTransport({
 
 
 
-
 route.post('/', (req, res) => {
-
 
     try {
     
         const {userEmail} = req.body;
-    
+
 
         fetchPost('login', {
             email: 'admin@speurgroup.com',
             password: 'admin'
           }).then(response=> {
-            console.log(response)
+
             if (!response.jwt){
               throw new Error(response.message ? response.message : 'Error')
             }
       
             const {jwt} = response
-
-
-
-
 
             fetchGet(`/users`, jwt).then(response => {
               
@@ -79,8 +73,6 @@ route.post('/', (req, res) => {
                 numbers: true
               });
         
-
-        
         
               const body = {
                 name: userInfo[0].name,
@@ -88,15 +80,12 @@ route.post('/', (req, res) => {
                 password
               }
               
-              
-          //     // put request user with new password
+
               fetchPut(`/users/${userInfo[0].id}`, body, jwt).then(response=> {
               
-                console.log(response)
-           
               
               }).catch(err=> { throw new Error(err)})
-          //   }).catch(err=>alert(err))
+
           const mailData = {
               from: 'speurbudgettracker@gmail.com',
               to: userEmail,
@@ -113,32 +102,14 @@ route.post('/', (req, res) => {
           });
             
         
-        
             }).catch(err=>{throw new Error(err)})
 
-
-
         }).catch(err=> {throw new Error(err)})
-
-
 
 
     } catch (err) {
         console.log(err)
 
     }
-
-
-
-
-
-      
-  
-    //   //get request to users
-        
-
-
-
-
 
 });

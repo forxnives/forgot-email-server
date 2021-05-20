@@ -73,28 +73,5 @@ async function fetchGet (route, jwt) {
     
 }
 
-// async function fetchDelete (route, jwt) {
-
-//     const bearer = 'Bearer ' + jwt;
-
-//     const response = await fetch(`https://marc.budgetapi.speurholdings.com/${route}`, {
-//         method: 'DELETE',
-//         headers: {
-//             'Authorization': bearer,
-//             'Content-Type': 'application/json',
-
-//         },
-//     })
-
-//     if (!response.ok) {
-
-//         throw new Error('Failure to retrieve')
-//     }
-
-//     const data = await response.json()
-//     return data
-
-    
-// }
 
 module.exports = { fetchGet, fetchPost, fetchPut}
